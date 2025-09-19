@@ -19,5 +19,5 @@ public class RecipesIngredients {
     private Recipe recipe;
     @ManyToOne
     @JoinColumn(name = "id_ingredients")
-    private Ingredients ingredients;
+    private Ingredient ingredients;
 }
