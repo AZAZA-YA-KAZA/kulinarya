@@ -1,14 +1,20 @@
 package com.example.kulinarya.repository;
 
 import com.example.kulinarya.models.Recipe;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.net.URL;
+
 public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
     @Modifying
-    @Query("UPDATE Manage m SET m.name = :name WHERE m.id = :id")
-    void updateNameById(@Param("id_recipe") Integer idRecipe, @Param("title") String title,
-                        @Param("description") String description, @Param("photo_url") String photo_Url);
+    @Transactional
+    @Query("UPDATE Recipe r SET r.title = :title, r.description = :description, r.photoUrl = :photoUrl WHERE r.idRecipe = :idRecipe")
+    void updateRecipeById(@Param("idRecipe") Integer idRecipe,
+                          @Param("title") String title,
+                          @Param("description") String description,
+                          @Param("photoUrl") URL photoUrl);
 }

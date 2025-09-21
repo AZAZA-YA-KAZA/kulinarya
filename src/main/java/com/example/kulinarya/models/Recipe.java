@@ -4,16 +4,17 @@ package com.example.kulinarya.models;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
 @Table(name = "recipe")
-@Setter
 @Entity
+@Data
+@NoArgsConstructor
 public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

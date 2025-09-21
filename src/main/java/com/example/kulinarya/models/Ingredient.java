@@ -14,9 +14,12 @@ import java.net.URL;
 public class Ingredient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_ingredients")
-    private Long idIngredients;
-    @Column(name = "name", length = 50)
+    @Column(name = "id_ingredient")
+    private Long idIngredient;
+    @Column(name = "nam", length = 50)
     private String name;
 
+    public Ingredient(String name) {
+        this.name = name;
+    }
 }

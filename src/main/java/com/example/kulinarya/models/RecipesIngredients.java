@@ -12,12 +12,17 @@ import lombok.Setter;
 public class RecipesIngredients {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_recipe_ingredients")
-    private Long idRecipeIngredients;
+    @Column(name = "id_recipe_ingredient")
+    private Long idRecipeIngredient;
     @ManyToOne
     @JoinColumn(name = "id_recipe")
-    private Recipe recipe;
+    private Long idRecipe;
     @ManyToOne
-    @JoinColumn(name = "id_ingredients")
-    private Ingredient ingredients;
+    @JoinColumn(name = "id_ingredient")
+    private Long idIngredient;
+
+    public RecipesIngredients(Long idRecipe, Long idIngredient) {
+        this.idRecipe = idRecipe;
+        this.idIngredient = idIngredient;
+    }
 }
