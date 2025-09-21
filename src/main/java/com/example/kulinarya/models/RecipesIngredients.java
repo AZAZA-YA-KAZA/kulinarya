@@ -2,23 +2,23 @@ package com.example.kulinarya.models;
 
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Table(name = "recipes_ingredients")
+@Table(name = "recipe_ingredient")
 @Entity
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
 public class RecipesIngredients {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_recipe_ingredient")
     private Long idRecipeIngredient;
-    @ManyToOne
-    @JoinColumn(name = "id_recipe")
+    @Column(name = "id_recipe")
     private Long idRecipe;
-    @ManyToOne
-    @JoinColumn(name = "id_ingredient")
+    @Column(name = "id_ingredient")
     private Long idIngredient;
     @Column(name = "count")
     private int count;

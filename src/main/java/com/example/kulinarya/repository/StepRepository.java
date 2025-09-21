@@ -14,15 +14,19 @@ import java.util.List;
 public interface StepRepository extends JpaRepository<Step, Integer> {
     @Modifying
     @Transactional
-    @Query("UPDATE Step r SET r.stepDescription = :stepDescription, r.stepOrder = :stepOrder" +
+    @Query("UPDATE Step r SET r.stepDescription = :stepDescription, r.stepOrder = :stepOrder " +
             "WHERE r.idStep = :idStep")
     void updateStepById(@Param("idStep") Long idStep,
                           @Param("stepDescription") String stepDescription,
                           @Param("stepOrder") int stepOrder);
-
     @Modifying
     @Transactional
-    @Query("SELECT * FROM Step s" +
+    @Query("DELETE FROM Step s WHERE s.idRecipe = :idRecipe " +
+            "AND s.idStep = :idStep")
+    void deletById(@Param("idRecipe") Long idRecipe,
+                          @Param("idStep") Long idStep);
+
+    @Query("SELECT s FROM Step s " +
             "WHERE s.idRecipe = :idRecipe")
     List<Step> getListStepByRecipe(@Param("idRecipe") Long idRecipe);
 }

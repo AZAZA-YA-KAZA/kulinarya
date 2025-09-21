@@ -2,20 +2,21 @@ package com.example.kulinarya.models;
 
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Table(name = "step")
 @Entity
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
 public class Step {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_step")
     private Long idStep;
-    @ManyToOne
-    @JoinColumn(name = "id_recipe")
+    @Column(name = "id_recipe")
     private Long idRecipe;
     @Column(name = "step_description")
     private String stepDescription;

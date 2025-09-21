@@ -36,17 +36,18 @@ public class ProjectService {
         return step;
     }
 
-    public Ingredient addIngredient(Long idRecipe, String name, int count, String unit) throws Exception {
-        Long idIngredient = ingredientRepository.getIdByName(name);
+    public Ingredient addIngredient(Long idRecipe, IngredientRequest ingredientRequest) throws Exception {
+        Integer idIngredient = ingredientRepository.getIdByName(ingredientRequest.name());
         Ingredient ingredient;
+        System.out.println(idIngredient);
         if (idIngredient == null) {
-            ingredient = new Ingredient(name);
+            ingredient = new Ingredient(ingredientRequest.name());
             ingredientRepository.save(ingredient);
         }
         else ingredient = ingredientRepository.findById(Math.toIntExact(idIngredient))
                 .orElseThrow(()-> new Exception("Not ingredient"));
         RecipesIngredients recipesIngredients = new RecipesIngredients(
-                idRecipe, ingredient.getIdIngredient(),count, unit);
+                idRecipe, ingredient.getIdIngredient(),ingredientRequest.count(), ingredientRequest.unit());
         recipeIngredientsRepository.save(recipesIngredients);
         return ingredient;
     }
@@ -70,8 +71,8 @@ public class ProjectService {
         return "Deleted";
     }
 
-    public String deleteStep(Long idStep) {
-        stepRepository.deleteById(Math.toIntExact(idStep));
+    public String deleteStep(Long idRecipe, Long idStep) {
+        stepRepository.deletById(idRecipe, idStep);
         return "Deleted";
     }
 

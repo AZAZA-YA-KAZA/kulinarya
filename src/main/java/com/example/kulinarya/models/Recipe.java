@@ -27,11 +27,6 @@ public class Recipe {
     @Column(name = "photo_url")
     private String photoUrl;
 
-    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
-    private List<RecipesIngredients> recipesIngredients = new ArrayList<>();
-    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
-    private List<Step> steps = new ArrayList<>();
-
     public Recipe(String title, String description, String photoUrl) {
         this.title = title;
         this.description = description;

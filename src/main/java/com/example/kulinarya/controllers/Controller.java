@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class Controller {
+public class Controller  {
     ProjectService projectService;
 
     public Controller(ProjectService projectService) {
@@ -34,15 +34,13 @@ public class Controller {
     @PostMapping("/api/kulinare/{idRecipe}/ingredient")
     public ResponseEntity<Ingredient> addIngredient(
             @PathVariable Long idRecipe,
-            @RequestBody String name,
-            @RequestBody int count,
-            @RequestBody String unit
+            @RequestBody IngredientRequest ingredientRequest
             ) throws Exception {
-        return ResponseEntity.ok(projectService.addIngredient(idRecipe, name, count, unit));
+        return ResponseEntity.ok(projectService.addIngredient(idRecipe, ingredientRequest));
     }
 
     //Редактирование рецепта
-    @PutMapping("/api/kulinare/{idRecipe}")
+    @PutMapping("/api/kulinare/recipe/{idRecipe}")
     public ResponseEntity<Recipe> updateRecipe(
             @PathVariable Long idRecipe,
             @RequestBody RecipeRequest recipeRequest
@@ -50,7 +48,7 @@ public class Controller {
         return ResponseEntity.ok(projectService.updateRecipe(idRecipe, recipeRequest));
     }
     //Редактирование шага в рецепте
-    @PutMapping("/api/kulinare/{idStep}")
+    @PutMapping("/api/kulinare/step/{idStep}")
     public ResponseEntity<Step> updateStep(
             @PathVariable Long idStep,
             @RequestBody StepRequest stepRequest
@@ -58,21 +56,22 @@ public class Controller {
         return ResponseEntity.ok(projectService.updateStep(idStep, stepRequest));
     }
     //Удаление рецепта
-    @DeleteMapping("/api/kulinare/{idRecipe}")
+    @DeleteMapping("/api/kulinare/recipe/{idRecipe}")
     public ResponseEntity<String> deleteRecipe(
             @PathVariable Long idRecipe
     ) {
         return ResponseEntity.ok(projectService.deleteRecipe(idRecipe));
     }
     //Удаление шага в рецепте
-    @DeleteMapping("/api/kulinare/{idStep}")
+    @DeleteMapping("/api/kulinare/step/{idRecipe}/{idStep}")
     public ResponseEntity<String> deleteStep(
+            @PathVariable Long idRecipe,
             @PathVariable Long idStep
     ) {
-        return ResponseEntity.ok(projectService.deleteStep(idStep));
+        return ResponseEntity.ok(projectService.deleteStep(idRecipe, idStep));
     }
     //Удаление ингредиента в рецепте
-    @PutMapping("/api/kulinare/{idRecipe}/{idIngredient}")
+    @DeleteMapping("/api/kulinare/{idRecipe}/{idIngredient}")
     public ResponseEntity<String> deleteIngredient(
             @PathVariable Long idRecipe,
             @PathVariable Long idIngredient
@@ -81,7 +80,7 @@ public class Controller {
     }
 
     //выдача рецепта
-    @GetMapping("/api/kulinare/{idRecipe}")
+    @GetMapping("/api/kulinare/recipe/{idRecipe}")
     public ResponseEntity<Recipe> getRecipe(
             @PathVariable Long idRecipe
     ) throws Exception {
