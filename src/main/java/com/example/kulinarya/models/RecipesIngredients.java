@@ -20,9 +20,15 @@ public class RecipesIngredients {
     @ManyToOne
     @JoinColumn(name = "id_ingredient")
     private Long idIngredient;
+    @Column(name = "count")
+    private int count;
+    @Column(name = "unit")
+    private String unit;
 
-    public RecipesIngredients(Long idRecipe, Long idIngredient) {
+    public RecipesIngredients(Long idRecipe, Long idIngredient, int count, String unit) {
         this.idRecipe = idRecipe;
         this.idIngredient = idIngredient;
+        this.count = count;
+        this.unit = unit;
     }
 }

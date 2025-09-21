@@ -10,6 +10,6 @@ import org.springframework.data.repository.query.Param;
 public interface IngredientRepository extends JpaRepository<Ingredient, Integer> {
     @Modifying
     @Transactional
-    @Query("SELECT id_ingredient FROM ingredient WHERE name = :name")
+    @Query("SELECT idIngredient FROM Ingredient WHERE name = :name")
     Long getIdByName(@Param("name") String name);
 }

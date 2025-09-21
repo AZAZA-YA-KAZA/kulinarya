@@ -12,9 +12,10 @@ import java.net.URL;
 public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
     @Modifying
     @Transactional
-    @Query("UPDATE Recipe r SET r.title = :title, r.description = :description, r.photoUrl = :photoUrl WHERE r.idRecipe = :idRecipe")
-    void updateRecipeById(@Param("idRecipe") Integer idRecipe,
+    @Query("UPDATE Recipe r SET r.title = :title, r.description = :description, r.photoUrl = :photoUrl" +
+            "WHERE r.idRecipe = :idRecipe")
+    void updateRecipeById(@Param("idRecipe") Long idRecipe,
                           @Param("title") String title,
                           @Param("description") String description,
-                          @Param("photoUrl") URL photoUrl);
+                          @Param("photoUrl") String photoUrl);
 }

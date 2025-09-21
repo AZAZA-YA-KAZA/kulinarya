@@ -5,5 +5,5 @@ import java.net.URL;
 public record RecipeRequest (
         String title,
         String description,
-        URL photoUrl){
+        String photoUrl){
 }
