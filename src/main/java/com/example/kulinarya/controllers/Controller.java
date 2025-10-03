@@ -55,6 +55,15 @@ public class Controller  {
     ) throws Exception {
         return ResponseEntity.ok(projectService.updateStep(idStep, stepRequest));
     }
+    //Редактирование ингредиента в рецепте
+    @PutMapping("/api/kulinare/ingredient/{idRecipe}/{idIngredient}")
+    public ResponseEntity<RecipesIngredients> updateIngredient(
+            @PathVariable Long idRecipe,
+            @PathVariable Long idIngredient,
+            @RequestBody IngredientRequest ingredientRequest
+    ) throws Exception {
+        return ResponseEntity.ok(projectService.updateIngredient(idRecipe, idIngredient, ingredientRequest));
+    }
     //Удаление рецепта
     @DeleteMapping("/api/kulinare/recipe/{idRecipe}")
     public ResponseEntity<String> deleteRecipe(

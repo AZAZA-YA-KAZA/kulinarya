@@ -7,5 +7,5 @@ import org.springframework.data.repository.query.Param;
 
 public interface IngredientRepository extends JpaRepository<Ingredient, Integer> {
     @Query("SELECT idIngredient FROM Ingredient WHERE name = :name")
-    Integer getIdByName(@Param("name") String name);
+    Long getIdByName(@Param("name") String name);
 }

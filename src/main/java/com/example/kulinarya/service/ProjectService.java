@@ -37,7 +37,7 @@ public class ProjectService {
     }
 
     public Ingredient addIngredient(Long idRecipe, IngredientRequest ingredientRequest) throws Exception {
-        Integer idIngredient = ingredientRepository.getIdByName(ingredientRequest.name());
+        Long idIngredient = ingredientRepository.getIdByName(ingredientRequest.name());
         Ingredient ingredient;
         System.out.println(idIngredient);
         if (idIngredient == null) {
@@ -91,5 +91,11 @@ public class ProjectService {
 
     public List<Object[]> getIngredient(Long idRecipe) {
         return recipeIngredientsRepository.getListIngredientByRecipe(idRecipe);
+    }
+
+    public RecipesIngredients updateIngredient(Long idRecipe, Long idIngredient, IngredientRequest ingredientRequest) {
+        recipeIngredientsRepository.updateIngredientById(idRecipe, idIngredient, ingredientRequest.name(),
+                ingredientRequest.count(), ingredientRequest.unit());
+        return recipeIngredientsRepository.getIngredientRecipe(idRecipe, idIngredient);
     }
 }

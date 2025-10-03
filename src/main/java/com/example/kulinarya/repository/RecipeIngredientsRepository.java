@@ -1,6 +1,7 @@
 package com.example.kulinarya.repository;
 
 import com.example.kulinarya.models.RecipesIngredients;
+import jakarta.persistence.Column;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -21,4 +22,14 @@ public interface RecipeIngredientsRepository extends JpaRepository<RecipesIngred
             "JOIN Ingredient i ON i.idIngredient = ri.idIngredient " +
             "WHERE ri.idRecipe = :idRecipe")
     List<Object[]> getListIngredientByRecipe(@Param("idRecipe") Long idRecipe);
+    @Query("UPDATE RecipesIngredients i SET i.name = :name AND i.count = :count AND i.unit = :unit" +
+            "WHERE i.idIngredient = :idIngredient AND i.idRecipe = :idRecipe")
+    void updateIngredientById (@Param("idRecipe") Long idRecipe,
+                               @Param("idIngredient") Long idIngredient,
+                               @Param("name") String name,
+                               @Param("count") int count,
+                               @Param("name") String unit);
+    @Query("SELECT ri FROM RecipesIngredients ri WHERE i.idIngredient = :idIngredient AND i.idRecipe = :idRecipe")
+    RecipesIngredients getIngredientRecipe (@Param("idRecipe") Long idRecipe,
+                               @Param("idIngredient") Long idIngredient);
 }
